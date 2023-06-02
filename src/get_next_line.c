@@ -19,7 +19,7 @@ char	*auxupdater(char *aux)
 
 	i = 0;
 	j = 0;
-	temp = malloc((ft_strlen(aux) + 1) * sizeof(char));
+	temp = malloc((ft_strlen_gnl(aux) + 1) * sizeof(char));
 	if (!temp)
 		return (free(aux), NULL);
 	while (aux[i] != '\0')
@@ -78,7 +78,7 @@ char	*read_line(int fd, char *aux)
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (free(aux), NULL);
-	while (i > 0 && !ft_strchr(aux, '\n'))
+	while (i > 0 && !ft_strchr_gnl(aux, '\n'))
 	{		
 		i = read(fd, buffer, BUFFER_SIZE);
 		if (i == -1)
@@ -107,7 +107,7 @@ char	*get_next_line(int fd)
 		aux = 0;
 		return (0);
 	}
-	if (!ft_strchr(aux, '\n'))
+	if (!ft_strchr_gnl(aux, '\n'))
 		aux = read_line(fd, aux);
 	if (aux[0] == '\0' || aux == NULL)
 	{
@@ -119,3 +119,16 @@ char	*get_next_line(int fd)
 	aux = auxupdater(aux);
 	return (line);
 }
+/*
+int main()
+{
+	int fd;
+	char	*gnl;
+	
+	fd = open ("../map/small16_map.ber", O_RDONLY);
+	gnl = get_next_line(fd);
+	printf("gnl:%s", gnl);
+	free (gnl);
+	close(fd);
+	return (0);
+}*/

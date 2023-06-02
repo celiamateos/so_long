@@ -12,24 +12,10 @@
 
 #include "../so_long.h"
 
-
-void	ft_readmap(t_list *e, char *map)
+void ft_init(t_list *e)
 {
-	int	fd;
-
-	fd = open(map, O_RDONLY);
-	e->line = get_next_line(fd);
-	e->lenline = ft_strlen(line);
-	if (e->lenline != '\n' || e->lenline -1 != 1)
-	//	ft_error()
-	
-	close(fd);
-}
-
-int ft_init(t_list *e)
-{
-	int		width = 500;
-	int		height = 500;
+	int		width = 80;
+	int		height = 80;
 
 	e->mlx =  mlx_init();
 	e->mlx_win = mlx_new_window(e->mlx, width, height, "MEOW!:3");
@@ -42,24 +28,45 @@ int ft_init(t_list *e)
 	mlx_put_image_to_window(e->mlx, e->mlx_win, e->wall, 240, 0);
 	mlx_put_image_to_window(e->mlx, e->mlx_win, e->collectable, 320, 1);
 	mlx_loop(e->mlx);
-	return(0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list	*element;
+	t_list	*e;
+
 	int		i;
 
-	i = ft_strlen(argv[1]);
 	if (argc != 2)
-		write(1, "Número de argumentos invalido", 1);
-	if (i - 3 != '.' || i - 2 != 'b' || i - 1 != 'e' || i != 'r') 
-		write (1, "Formato del mapa no valido", 1);
-	element =  (t_list *)malloc(sizeof(t_list));
-	if (!element)
+	{
+		write(1,"\x1b[1;31m Wrong! You must enter 2 arguments", 42);
 		return (0);
-	ft_readmap(element, argv[1]);
-	ft_init(element);
-	free(element);
+	}
+	e = (t_list *)malloc(sizeof(t_list));
+	if (!e)
+		return (0);
+	e->namemap = argv[1];
+	i = ft_strlen(e->namemap);
+	if (i < 2 || e->namemap[i - 4] != '.' || e->namemap[i - 3] != 'b'
+		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
+	{
+		write (1, "\x1b[1;31m Wrong! The map name is invalid", 38);
+		free(e);
+		return (0);
+	}
+	
+
+	/*int fd;
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	printf("Fd asignado: %i", fd);
+	//e->line = get_next_line(fd);
+	//printf("line:%s",e->line);
+	free(e->line);
+	close (fd);*/
+	
+	ft_readmap(e, argv[1]);
+	//ft_init(e);
+	free(e);
 	return (0);
 }

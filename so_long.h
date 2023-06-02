@@ -20,7 +20,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 typedef struct	s_list
 {	
@@ -30,8 +30,9 @@ typedef struct	s_list
 	void	*player;
 	void	*wall;
 	void	*collectable;
-	void	**map;
-	void	*line;
+	char	*namemap;
+	char	*line;
+	int		error;
 	int		lenline;
 	int		lenarray;
 	int		i;
@@ -42,8 +43,14 @@ char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin_gnl(char *aux, char *buffer);
 char	*get_next_line(int fd);
 int		main(int argc, char **argv);
-int		ft_init(t_list *element);
+void	ft_init(t_list *element);
+int		ft_error(t_list *e, int error, int fd);
+void	ft_readmap(t_list *e, char *map);
+char	*get_next_line(int fd);
+size_t	ft_strlen_gnl(char *str);
+char	*ft_strchr_gnl(char *s, int c);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+
 #endif

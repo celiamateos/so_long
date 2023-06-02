@@ -6,7 +6,7 @@
 #    By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/29 20:52:58 by cmateos           #+#    #+#              #
-#    Updated: 2023/05/31 15:22:15 by cmateos-         ###   ########.fr        #
+#    Updated: 2023/06/02 13:14:19 by cmateos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,13 @@ NAME = so_long
 
 # Compilador que se usará:
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 # Crear una biblioteca estática (ar) y agregar archivos objeto a ella (r), 
 # creándola si no existe (c) y añadiendo información de índice para facilitar la búsqueda de símbolos (s).
 INCLUDE = so_long.h
 SRC = ./src/so_long.c ./src/ft_memset.c ./src/ft_calloc.c ./src/ft_strlen.c ./src/ft_strchr.c \
-	./src/ft_strjoin_gnl.c ./src/get_next_line.c
+	./src/get_next_line_utils.c ./src/get_next_line.c ./src/ft_error.c ./src/ft_readmap.c
 
 # Define una lista de archivos objeto correspondientes a los archivos fuente.
 # Sustituye la extensión .c por .o.
