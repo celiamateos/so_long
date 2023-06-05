@@ -53,18 +53,6 @@ int	main(int argc, char **argv)
 		free(e);
 		return (0);
 	}
-	
-
-	/*int fd;
-	fd = open(map, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	printf("Fd asignado: %i", fd);
-	//e->line = get_next_line(fd);
-	//printf("line:%s",e->line);
-	free(e->line);
-	close (fd);*/
-	
 	ft_readmap(e, argv[1]);
 	//ft_init(e);
 	free(e);
