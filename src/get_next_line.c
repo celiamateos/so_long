@@ -119,16 +119,3 @@ char	*get_next_line(int fd)
 	aux = auxupdater(aux);
 	return (line);
 }
-/*
-int main()
-{
-	int fd;
-	char	*gnl;
-	
-	fd = open ("../map/small16_map.ber", O_RDONLY);
-	gnl = get_next_line(fd);
-	printf("gnl:%s", gnl);
-	free (gnl);
-	close(fd);
-	return (0);
-}*/

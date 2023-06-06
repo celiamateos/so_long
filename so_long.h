@@ -20,7 +20,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1
 # endif
 typedef struct	s_list
 {	
@@ -31,13 +31,11 @@ typedef struct	s_list
 	void	*wall;
 	void	*collectable;
 	char	*namemap;
-	char	*line;
+	char	*gnl;
 	char	*longline;
+	char	**map;
 	int		error;
-	int		lenline;
-	int		num_line;
 	int		i;
-	int		j;
 }	t_list;
 
 char	*ft_strchr(const char *s, int c);
@@ -57,7 +55,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
 int		main(int argc, char **argv);
 void	ft_init(t_list *element);
 int		ft_error(t_list *e, int error, int fd);
-void	ft_readmap(t_list *e, char *map);
-char	*ft_first_read(t_list *e, int fd);
+int		ft_readmap(t_list *e, char *map);
+int		ft_first_read(t_list *e, int fd);
 
 #endif

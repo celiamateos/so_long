@@ -10,55 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long.h"
-/*
-char	*ft_first_read(t_list *e, int fd)
-{
-	static char *longline;
-	while (1)
-	{
-		e->num_line++;
-		e->line = get_next_line(fd);
-		e->lenline = ft_strlen(e->line);
-		printf("lenline:%i", e->lenline);
-		free(e->line);
-		longline = ft_strjoin(longline, e->line);
-		if (e->line == NULL)
-		{
-			printf("longline:%s", longline);
-			return(num_line);
-			break ;
-		}
-	}
-}*/
 
-void	ft_readmap(t_list *e, char *map)
+int	ft_first_read(t_list *e, int fd)
+{
+ 	while (1)
+	{
+		e->gnl = get_next_line(fd);
+		printf("gnl: %s", e->gnl);
+		if (e->gnl != NULL)
+			e->longline = ft_strjoin_gnl(e->longline, e->gnl);
+		printf("longline:\n%s", e->longline);
+		free(e->gnl);
+		if (e->gnl == NULL)
+			break ;
+	}
+	return (0);
+}
+
+int	ft_readmap(t_list *e, char *map)
 {
 	int	fd;
     int error;
-	int	i;
-	//static char	*longline;
 
-	i = 0;
+	e->longline = NULL;
     error = 0;
 	fd = open(map, O_RDONLY);
-	printf("fd asignado:%i", fd);
+	//printf("\nfd asignado:%i", fd);
 	if (fd < 0)
 		ft_error(e, 1 , fd);
 	ft_first_read(e, fd);
+	e->map = ft_split(e->longline, '\n');
+	printf("\nelputomapa\n%s", e->map[1]);
 	
-	//if (e->num_line * e->lenline < 15)
-	//	ft_error(e, 1, fd);
-	
-
-	//longline[ft_strlen(longline) + 1] = '\0';
-	//printf("\nlongline: %s", longline);
-	//printf("%s", e->longline);
-    /*printf("\n%i", e->lenline);
-	if (e->line[e->lenline - 1] != '\n' || e->line[e->lenline - 2] != '1')
+	/*if (e->line[e->lenline - 1] != '\n' || e->line[e->lenline - 2] != '1')
 	{
 		ft_error(e, 1, fd);
 	}
 	else
 		write (1, "ok!", 3);*/
 	close(fd);
+	return (0);
 }

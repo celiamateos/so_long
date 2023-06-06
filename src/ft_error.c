@@ -15,7 +15,7 @@ int	ft_error(t_list *e, int error, int fd)
 {
 	e->i = 0;
 	if (error == 1)
-		write (1, "El mapa no es válido\n", 22);
+		write (1, "Error\nMap is not valid", 22);
 	close(fd);
 	return(0);
 }
