@@ -15,7 +15,7 @@ int	ft_first_read(t_list *e, int fd)
 {
  	while (1)
 	{
-		e->gnl = get_next_line(fd);
+		e->gnl = get_next_line(fd, e);
 		if (e->gnl != NULL)
 			e->longline = ft_strjoin_gnl(e->longline, e->gnl);
 		free(e->gnl);
@@ -71,7 +71,7 @@ int	ft_readmap(t_list *e, char *map)
 		ft_error(e, 1);
 	ft_first_read(e, fd);
 	e->map = ft_split(e->longline, '\n');
-	//printf("\nelputomapa:\n%s", e->map[1]);
+	printf("\nelputomapa:\n%s", e->map[1]);
 	ft_check_map(e);
 
 	close(fd);

@@ -96,7 +96,7 @@ char	*read_line(int fd, char *aux)
 	return (aux);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, t_list *e)
 {
 	static char	*aux;
 	char		*line;
@@ -117,5 +117,7 @@ char	*get_next_line(int fd)
 	}
 	line = save_line(aux);
 	aux = auxupdater(aux);
+	if (line[0] == '\n')
+		ft_error(e, 3);
 	return (line);
 }

@@ -50,7 +50,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, t_list *e);
 size_t	ft_strlen_gnl(char *str);
 char	*ft_strchr_gnl(char *s, int c);
 char	*ft_strjoin_gnl(char *s1, char *s2);
