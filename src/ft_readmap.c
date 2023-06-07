@@ -25,38 +25,81 @@ int	ft_first_read(t_list *e, int fd)
 	return (0);
 }
 
-void	ft_check_map(t_list *e)
+void	ft_check_map_objects(t_list *e)
 {
-	int	row;
 	int	i;
-	int j;
 
 	i = 0;
-	j = 0;
-	row = 0;
-	while (e->map[i] != NULL)
-	{
-		row++;
+	while (e->longline[i] != '\0')
+	{	
+		e->objects++;
+		if (e->longline[i] == '1')
+			e->wall++;
+		if (e->longline[i] == 'C')
+			e->collectable++;
+		if (e->longline[i] == 'P')
+			e->player++;
+		if (e->longline[i] == 'E')
+			e->exit++;
+		if (e->longline[i] == '0')
+			e->floor++;
+		if (e->longline[i] == '\n')
+			e->objects--;
 		i++;
 	}
-	printf("i:%i", i);
-	printf("\nrows:%i", row);
+	printf("\n1:%d", e->wall);
+	printf("\nc:%d", e->collectable);
+	printf("\np:%d", e->player);
+	printf("\ne:%d", e->exit);
+	printf("\n0:%d", e->floor);
+	printf("\ntotal:%d", e->objects);
+
+	if (e->player != 1 || e->collectable < 1 || e->exit < 1)
+		ft_error(e, 4);
+	if (e->player + e->collectable + e->exit + e->wall + e->floor != e->objects)
+		ft_error(e, 5);
+		
+	
+}
+void	ft_check_map_rectangular(t_list *e)
+{
+	//int	row;
+	int	i;
+
 	i = 0;
-	while (e->map[i] != NULL && i < row - 1)
+	while (e->map[i++] != NULL)
+		e->row++;
+	i = 0;
+	while (e->map[i] != NULL && i < e->row - 1)
 	{
 		e->lenline = ft_strlen(e->map[i]) - 1;
-		printf("\nlenline:%i", e->lenline);
-		printf("\nline:%i", i);
 		i++;
 		e->lenline2 = ft_strlen(e->map[i]) - 1;
-		printf("\nlenline2:%i", e->lenline2);
-		printf("\nline:%i", i);
-		//printf("\ni:%i", i);
 		if (e->lenline != e->lenline2)
-		{
 			ft_error(e, 3);
-			break ;
+	}
+}
+
+void	ft_check_map_closed(t_list *e)
+{
+	int	i;
+	int j;
+	char	c;
+
+	c = '1';
+	i = 0;
+	j = 0;
+	while (e->map[i] != NULL)
+	{
+		while (e->map[i][j] != '\0')
+		{
+			if (e->map[0][j] != c || e->map[e->row - 1][j] != c )
+				ft_error(e, 3);
+			j++;
 		}
+		if (e->map[i][0] != c)
+			ft_error(e, 3);
+		i++;
 	}
 }
 
@@ -64,19 +107,16 @@ int	ft_readmap(t_list *e, char *map)
 {
 	int	fd;
 
-	e->longline = NULL;
 	fd = open(map, O_RDONLY);
 	//printf("\nfd asignado:%i", fd);
 	if (fd == -1)
 		ft_error(e, 1);
 	ft_first_read(e, fd);
+	ft_check_map_objects(e);
 	e->map = ft_split(e->longline, '\n');
-	printf("\nelputomapa:\n%s", e->map[1]);
-	ft_check_map(e);
-
+	ft_check_map_rectangular(e);
+	ft_check_map_closed(e);
 	close(fd);
 	return (0);
 }
-
-//e->map[0][ft_strlen(e->map[0])] != '\n' 
-//printf("\nlen:%s", e->map[i]);
+//				printf("%s", &e->map[0][j]);

@@ -16,10 +16,13 @@ void	ft_error(t_list *e, int error)
 	e->i = 0;
 	if (error == 1)
 		perror("\x1b[1;31mError\ncan`t read the map\x1b[0m");
-	// aqui me da un segfault pero weno k le vamos a hacer jeje
 	if (error == 2)
 		perror("\x1b[1;31mError\nMap isn't rectangular\x1b[0m");
 	if (error == 3)
-		perror("\x1b[1;31mError\nMap isn't surrounded by walls\x1b[0m");
+		perror("\x1b[1;31mError\nMap isn't surrounded by walls or map isn't rectangular\x1b[0m");
+	if (error == 4)
+		perror("\x1b[1;31mError\nNot enough collectables\x1b[0m");
+	if (error == 5)
+		perror("\x1b[1;31mError\nhay un puto intruso en el mapa\x1b[0m");
 	exit(1);
 }

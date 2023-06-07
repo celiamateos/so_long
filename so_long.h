@@ -18,18 +18,14 @@
 # include <string.h>
 # include <mlx.h>
 # include <fcntl.h>
-#include <errno.h>
+# include <errno.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
-typedef struct	s_list
+typedef struct s_list
 {	
 	void	*mlx;
 	void	*mlx_win;
-	void	*floor;
-	void	*player;
-	void	*wall;
-	void	*collectable;
 	char	*namemap;
 	char	*gnl;
 	char	*longline;
@@ -39,6 +35,12 @@ typedef struct	s_list
 	int		error;
 	int		i;
 	int		row;
+	int		wall;
+	int		collectable;
+	int		player;
+	int		exit;
+	int		floor;
+	int		objects;
 }	t_list;
 
 char	*ft_strchr(const char *s, int c);
@@ -46,9 +48,8 @@ size_t	ft_strlen(const char *str);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+void	*ft_calloc(size_t count, size_t size);
+void	*ft_memset(void *b, int c, size_t len);
 
 char	*get_next_line(int fd, t_list *e);
 size_t	ft_strlen_gnl(char *str);
@@ -60,6 +61,7 @@ void	ft_init(t_list *element);
 void	ft_error(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
 int		ft_first_read(t_list *e, int fd);
-void	ft_check_map(t_list *e);
-
+void	ft_check_map_objects(t_list *e);
+void	ft_check_map_rectangular(t_list *e);
+void	ft_check_map_closed(t_list *e);
 #endif

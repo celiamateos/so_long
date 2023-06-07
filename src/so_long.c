@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
+/*
 void ft_init(t_list *e)
 {
 	int		width = 80;
@@ -28,7 +28,7 @@ void ft_init(t_list *e)
 	mlx_put_image_to_window(e->mlx, e->mlx_win, e->wall, 240, 0);
 	mlx_put_image_to_window(e->mlx, e->mlx_win, e->collectable, 320, 1);
 	mlx_loop(e->mlx);
-}
+}*/
 
 int	main(int argc, char **argv)
 {
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 		perror("\x1b[1;31m Wrong! You must enter 2 arguments\x1b[0m");
 		return (0);
 	}
-	e = (t_list *)malloc(sizeof(t_list));
+	e = ft_calloc(1, sizeof(t_list));
 	if (!e)
 		return (0);
 	e->namemap = argv[1];

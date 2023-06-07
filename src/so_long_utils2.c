@@ -11,60 +11,26 @@
 /* ************************************************************************** */
 #include "../so_long.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*p;
+
+	p = malloc(count * size);
+	if (!p)
+		return (NULL);
+	ft_memset(p, 0, (count * size));
+	return (p);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t	i;
 
 	i = 0;
-	if (dstsize != 0)
+	while (i < len)
 	{
-		while (src[i] != '\0' && i < (dstsize - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-	dst[i] = '\0';
+		((unsigned char *)b)[i] = c;
+		i++;
 	}
-	return (ft_strlen(src));
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
-{
-	size_t	id;
-	size_t	is;
-	size_t	len;
-
-	len = ft_strlen(dst);
-	id = 0;
-	is = 0;
-	while (dst[id] != '\0')
-			id++;
-	if (dstsize != 0 && dstsize >= len)
-	{
-		while (src[is] && is + 1 < dstsize - len)
-		{
-			dst[id] = src[is];
-			id++;
-			is++;
-		}
-		dst[id] = '\0';
-		return (len + ft_strlen(src));
-	}	
-	else
-		return (dstsize + ft_strlen(src));
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*caja;
-	size_t	len1y2;
-
-	len1y2 = ft_strlen(s1) + ft_strlen(s2) + 1;
-	caja = malloc((len1y2) * sizeof(char));
-	if (!caja)
-		return (NULL);
-	ft_strlcpy((char *)caja, s1, len1y2);
-	ft_strlcat((char *)caja, s2, len1y2);
-	caja[len1y2 - 1] = '\0';
-	return (caja);
+	return (b);
 }
