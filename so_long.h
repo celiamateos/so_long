@@ -16,9 +16,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
-# include <stdlib.h>
 # include <mlx.h>
 # include <fcntl.h>
+#include <errno.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
@@ -34,8 +34,11 @@ typedef struct	s_list
 	char	*gnl;
 	char	*longline;
 	char	**map;
+	int		lenline;
+	int		lenline2;
 	int		error;
 	int		i;
+	int		row;
 }	t_list;
 
 char	*ft_strchr(const char *s, int c);
@@ -54,8 +57,9 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
 
 int		main(int argc, char **argv);
 void	ft_init(t_list *element);
-int		ft_error(t_list *e, int error, int fd);
+void	ft_error(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
 int		ft_first_read(t_list *e, int fd);
+void	ft_check_map(t_list *e);
 
 #endif

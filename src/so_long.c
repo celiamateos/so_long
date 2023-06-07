@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		write(1,"\x1b[1;31m Wrong! You must enter 2 arguments", 42);
+		perror("\x1b[1;31m Wrong! You must enter 2 arguments\x1b[0m");
 		return (0);
 	}
 	e = (t_list *)malloc(sizeof(t_list));
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	if (i < 2 || e->namemap[i - 4] != '.' || e->namemap[i - 3] != 'b'
 		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
 	{
-		write (1, "\x1b[1;31m Wrong! The map name is invalid", 38);
+		perror("\x1b[1;31m Wrong! The map name is invalid\x1b[0m");
 		free(e);
 		return (0);
 	}

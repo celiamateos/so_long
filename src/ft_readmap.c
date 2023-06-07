@@ -16,10 +16,8 @@ int	ft_first_read(t_list *e, int fd)
  	while (1)
 	{
 		e->gnl = get_next_line(fd);
-		printf("gnl: %s", e->gnl);
 		if (e->gnl != NULL)
 			e->longline = ft_strjoin_gnl(e->longline, e->gnl);
-		printf("longline:\n%s", e->longline);
 		free(e->gnl);
 		if (e->gnl == NULL)
 			break ;
@@ -27,27 +25,58 @@ int	ft_first_read(t_list *e, int fd)
 	return (0);
 }
 
+void	ft_check_map(t_list *e)
+{
+	int	row;
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	row = 0;
+	while (e->map[i] != NULL)
+	{
+		row++;
+		i++;
+	}
+	printf("i:%i", i);
+	printf("\nrows:%i", row);
+	i = 0;
+	while (e->map[i] != NULL && i < row - 1)
+	{
+		e->lenline = ft_strlen(e->map[i]) - 1;
+		printf("\nlenline:%i", e->lenline);
+		printf("\nline:%i", i);
+		i++;
+		e->lenline2 = ft_strlen(e->map[i]) - 1;
+		printf("\nlenline2:%i", e->lenline2);
+		printf("\nline:%i", i);
+		//printf("\ni:%i", i);
+		if (e->lenline != e->lenline2)
+		{
+			ft_error(e, 3);
+			break ;
+		}
+	}
+}
+
 int	ft_readmap(t_list *e, char *map)
 {
 	int	fd;
-    int error;
 
 	e->longline = NULL;
-    error = 0;
 	fd = open(map, O_RDONLY);
 	//printf("\nfd asignado:%i", fd);
-	if (fd < 0)
-		ft_error(e, 1 , fd);
+	if (fd == -1)
+		ft_error(e, 1);
 	ft_first_read(e, fd);
 	e->map = ft_split(e->longline, '\n');
-	printf("\nelputomapa\n%s", e->map[1]);
-	
-	/*if (e->line[e->lenline - 1] != '\n' || e->line[e->lenline - 2] != '1')
-	{
-		ft_error(e, 1, fd);
-	}
-	else
-		write (1, "ok!", 3);*/
+	//printf("\nelputomapa:\n%s", e->map[1]);
+	ft_check_map(e);
+
 	close(fd);
 	return (0);
 }
+
+//e->map[0][ft_strlen(e->map[0])] != '\n' 
+//printf("\nlen:%s", e->map[i]);
