@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 #include "../so_long.h"
 
-int	ft_first_read(t_list *e, int fd)
+int	ft_first_read(t_list *e)
 {
  	while (1)
 	{
-		e->gnl = get_next_line(fd, e);
+		e->gnl = get_next_line(e);
 		if (e->gnl != NULL)
 			e->longline = ft_strjoin_gnl(e->longline, e->gnl);
 		free(e->gnl);
@@ -47,23 +47,13 @@ void	ft_check_map_objects(t_list *e)
 			e->objects--;
 		i++;
 	}
-	printf("\n1:%d", e->wall);
-	printf("\nc:%d", e->collectable);
-	printf("\np:%d", e->player);
-	printf("\ne:%d", e->exit);
-	printf("\n0:%d", e->floor);
-	printf("\ntotal:%d", e->objects);
-
-	if (e->player != 1 || e->collectable < 1 || e->exit < 1)
+	if (e->player != 1 || e->collectable < 1 || e->exit != 1)
 		ft_error(e, 4);
 	if (e->player + e->collectable + e->exit + e->wall + e->floor != e->objects)
-		ft_error(e, 5);
-		
-	
+		ft_error(e, 5);	
 }
 void	ft_check_map_rectangular(t_list *e)
 {
-	//int	row;
 	int	i;
 
 	i = 0;
@@ -76,7 +66,7 @@ void	ft_check_map_rectangular(t_list *e)
 		i++;
 		e->lenline2 = ft_strlen(e->map[i]) - 1;
 		if (e->lenline != e->lenline2)
-			ft_error(e, 3);
+			ft_error(e, 6);
 	}
 }
 
@@ -105,18 +95,15 @@ void	ft_check_map_closed(t_list *e)
 
 int	ft_readmap(t_list *e, char *map)
 {
-	int	fd;
-
-	fd = open(map, O_RDONLY);
-	//printf("\nfd asignado:%i", fd);
-	if (fd == -1)
+	e->fd = open(map, O_RDONLY);
+	//printf("\ne->fd asignado:%i", e->fd);
+	if (e->fd == -1)
 		ft_error(e, 1);
-	ft_first_read(e, fd);
+	ft_first_read(e);
 	ft_check_map_objects(e);
 	e->map = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_map_closed(e);
-	close(fd);
+	close(e->fd);
 	return (0);
 }
-//				printf("%s", &e->map[0][j]);

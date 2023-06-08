@@ -24,6 +24,7 @@
 # endif
 typedef struct s_list
 {	
+  	int   	fd;
 	void	*mlx;
 	void	*mlx_win;
 	char	*namemap;
@@ -51,16 +52,17 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 
-char	*get_next_line(int fd, t_list *e);
+char	*get_next_line(t_list *e);
 size_t	ft_strlen_gnl(char *str);
 char	*ft_strchr_gnl(char *s, int c);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 
 int		main(int argc, char **argv);
+void	ft_check_name_ber(t_list *e, char *map);
 void	ft_init(t_list *element);
 void	ft_error(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
-int		ft_first_read(t_list *e, int fd);
+int		ft_first_read(t_list *e);
 void	ft_check_map_objects(t_list *e);
 void	ft_check_map_rectangular(t_list *e);
 void	ft_check_map_closed(t_list *e);

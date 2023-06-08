@@ -69,7 +69,7 @@ char	*save_line(char *aux)
 	return (line[i] = '\0', line);
 }
 
-char	*read_line(int fd, char *aux)
+char	*read_line(t_list *e, char *aux)
 {
 	char	*buffer;
 	int		i;
@@ -80,7 +80,7 @@ char	*read_line(int fd, char *aux)
 		return (free(aux), NULL);
 	while (i > 0 && !ft_strchr_gnl(aux, '\n'))
 	{		
-		i = read(fd, buffer, BUFFER_SIZE);
+		i = read(e->fd, buffer, BUFFER_SIZE);
 		if (i == -1)
 		{
 			free(aux);
@@ -96,19 +96,19 @@ char	*read_line(int fd, char *aux)
 	return (aux);
 }
 
-char	*get_next_line(int fd, t_list *e)
+char	*get_next_line(t_list *e)
 {
 	static char	*aux;
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || e->fd < 0 || read(e->fd, 0, 0) < 0)
 	{	
 		free(aux);
 		aux = 0;
 		return (0);
 	}
 	if (!ft_strchr_gnl(aux, '\n'))
-		aux = read_line(fd, aux);
+		aux = read_line(e, aux);
 	if (aux[0] == '\0' || aux == NULL)
 	{
 		free(aux);

@@ -6,7 +6,7 @@
 /*   By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 22:30:34 by cmateos           #+#    #+#             */
-/*   Updated: 2023/05/31 15:55:09 by cmateos-         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:57:53 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,29 @@ void ft_init(t_list *e)
 	mlx_loop(e->mlx);
 }*/
 
+void	ft_check_name_ber(t_list *e, char *map)
+{
+	int		i;
+
+	e->namemap = map;
+	i = ft_strlen(e->namemap);
+	if (i < 2 || e->namemap[i - 4] != '.' || e->namemap[i - 3] != 'b'
+		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
+	{
+		perror("\x1b[1;31m Wrong! The map name is invalid\x1b[0m");
+		free(e);
+		exit(1);
+	}
+}
+
+void	leaks(void)
+{
+	system("leaks -q so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*e;
-
-	int		i;
 
 	if (argc != 2)
 	{
@@ -44,17 +62,11 @@ int	main(int argc, char **argv)
 	e = ft_calloc(1, sizeof(t_list));
 	if (!e)
 		return (0);
-	e->namemap = argv[1];
-	i = ft_strlen(e->namemap);
-	if (i < 2 || e->namemap[i - 4] != '.' || e->namemap[i - 3] != 'b'
-		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
-	{
-		perror("\x1b[1;31m Wrong! The map name is invalid\x1b[0m");
-		free(e);
-		return (0);
-	}
+	ft_check_name_ber(e, argv[1]);
 	ft_readmap(e, argv[1]);
 	//ft_init(e);
 	free(e);
+	exit(1);
+	atexit(leaks);
 	return (0);
 }
