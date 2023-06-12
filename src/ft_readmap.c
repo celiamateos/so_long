@@ -13,7 +13,7 @@
 
 int	ft_first_read(t_list *e)
 {
- 	while (1)
+	while (1)
 	{
 		e->gnl = get_next_line(e);
 		if (e->gnl != NULL)
@@ -50,8 +50,9 @@ void	ft_check_map_objects(t_list *e)
 	if (e->player != 1 || e->collectable < 1 || e->exit != 1)
 		ft_error(e, 4);
 	if (e->player + e->collectable + e->exit + e->wall + e->floor != e->objects)
-		ft_error(e, 5);	
+		ft_error(e, 5);
 }
+
 void	ft_check_map_rectangular(t_list *e)
 {
 	int	i;
@@ -72,31 +73,25 @@ void	ft_check_map_rectangular(t_list *e)
 
 void	ft_check_map_closed(t_list *e)
 {
-	int	i;
-	int j;
-	char	c;
-
-	c = '1';
-	i = 0;
-	j = 0;
-	while (e->map[i] != NULL)
+	e->c = '1';
+	e->lenstr = ft_strlen(e->map[1]);
+	while (e->map[e->i] != NULL)
 	{
-		while (e->map[i][j] != '\0')
+		while (e->map[e->i][e->j] != '\0')
 		{
-			if (e->map[0][j] != c || e->map[e->row - 1][j] != c )
+			if (e->map[0][e->j] != e->c || e->map[e->row - 1][e->j] != e->c)
 				ft_error(e, 3);
-			j++;
+			e->j++;
 		}
-		if (e->map[i][0] != c)
+		if (e->map[e->i][0] != e->c || e->map[e->i][e->lenstr - 1] != e->c)
 			ft_error(e, 3);
-		i++;
+		e->i++;
 	}
 }
 
 int	ft_readmap(t_list *e, char *map)
 {
 	e->fd = open(map, O_RDONLY);
-	//printf("\ne->fd asignado:%i", e->fd);
 	if (e->fd == -1)
 		ft_error(e, 1);
 	ft_first_read(e);
