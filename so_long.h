@@ -35,6 +35,10 @@ typedef struct s_list
 	int		lenline2;
 	int		error;
 	int		i;
+	int		j;
+	int		lenstr;
+	char	c;
+	int		p;
 	int		row;
 	int		wall;
 	int		collectable;
@@ -42,6 +46,9 @@ typedef struct s_list
 	int		exit;
 	int		floor;
 	int		objects;
+	int		x;
+	int		y;
+	int		columns;
 }	t_list;
 
 char	*ft_strchr(const char *s, int c);
@@ -66,4 +73,6 @@ int		ft_first_read(t_list *e);
 void	ft_check_map_objects(t_list *e);
 void	ft_check_map_rectangular(t_list *e);
 void	ft_check_map_closed(t_list *e);
+//int		ft_check_path(t_list *e);
+
 #endif

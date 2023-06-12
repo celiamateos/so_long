@@ -74,6 +74,9 @@ void	ft_check_map_rectangular(t_list *e)
 void	ft_check_map_closed(t_list *e)
 {
 	e->c = '1';
+	e->p = 'P';
+	e->i = 0;
+	
 	e->lenstr = ft_strlen(e->map[1]);
 	while (e->map[e->i] != NULL)
 	{
@@ -99,6 +102,7 @@ int	ft_readmap(t_list *e, char *map)
 	e->map = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_map_closed(e);
+	//ft_check_path(e);
 	close(e->fd);
 	return (0);
 }

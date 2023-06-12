@@ -13,14 +13,16 @@
 
 void	ft_error(t_list *e, int error)
 {
-	e->i = 0;
+
 	if (error == 1)
 		perror("\x1b[1;31mError\ncan`t read the map\x1b[0m");
 	if (error == 2)
-		perror("\x1b[1;31mError\nMap isn't rectangular\x1b[0m");
-  // no estoy usando el error 2 aun.
+	{
+		//printf("\n%s", &e->map[e->i - 1][e->lenstr - 1]);
+		perror("error de prueba");
+	}	
 	if (error == 3)
-		perror("\x1b[1;31mError\nMap isn'trectangular\x1b[0m");
+		perror("\x1b[1;31mError\nMap should be rectangular and close\x1b[0m");
 	if (error == 4 && e->collectable < 1)
 		perror("\x1b[1;31mError\nNot enough collectables\x1b[0m");
 	if (error == 4 && e->player != 1)
@@ -28,7 +30,7 @@ void	ft_error(t_list *e, int error)
   if (error == 4 && e->exit != 1)
 		perror("\x1b[1;31mError\nThe map must have only one exit\x1b[0m");
   if (error == 5)
-		perror("\x1b[1;31mError\nhay un puto intruso en el mapa\x1b[0m");
+		perror("\x1b[1;31mError\nthe map has invalid characters\x1b[0m");
   if (error == 6)
     perror("\x1b[1;31mError\nMap isn't surrounded by walls\x1b[0m");
   free(e);
