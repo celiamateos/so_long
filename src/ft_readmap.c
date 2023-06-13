@@ -56,36 +56,48 @@ void	ft_check_map_objects(t_list *e)
 void	ft_check_map_rectangular(t_list *e)
 {
 	int	i;
+	int	lenline;
+	int	lenline2;
 
 	i = 0;
 	while (e->map[i++] != NULL)
 		e->row++;
+	e->heightmap = e->row;
 	i = 0;
 	while (e->map[i] != NULL && i < e->row - 1)
 	{
-		e->lenline = ft_strlen(e->map[i]) - 1;
+		lenline = ft_strlen(e->map[i]) - 1;
 		i++;
-		e->lenline2 = ft_strlen(e->map[i]) - 1;
-		if (e->lenline != e->lenline2)
+		lenline2 = ft_strlen(e->map[i]) - 1;
+		if (lenline != lenline2)
 			ft_error(e, 6);
 	}
 }
 
 void	ft_check_map_closed(t_list *e)
 {
-	e->c = '1';
-	e->lenstr = ft_strlen(e->map[1]);
-	while (e->map[e->i] != NULL)
+	int		i;
+	int		j;
+	char	c;
+	int		lenstr;
+
+	lenstr = 0;
+	i = 0;
+	j = 0;
+	c = '1';
+	lenstr = ft_strlen(e->map[1]);
+	e->widthmap = lenstr;
+	while (e->map[i] != NULL)
 	{
-		while (e->map[e->i][e->j] != '\0')
+		while (e->map[i][j] != '\0')
 		{
-			if (e->map[0][e->j] != e->c || e->map[e->row - 1][e->j] != e->c)
+			if (e->map[0][j] != c || e->map[e->row - 1][j] != c)
 				ft_error(e, 3);
-			e->j++;
+			j++;
 		}
-		if (e->map[e->i][0] != e->c || e->map[e->i][e->lenstr - 1] != e->c)
+		if (e->map[i][0] != c || e->map[i][lenstr - 1] != c)
 			ft_error(e, 3);
-		e->i++;
+		i++;
 	}
 }
 
@@ -99,6 +111,5 @@ int	ft_readmap(t_list *e, char *map)
 	e->map = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_map_closed(e);
-	close(e->fd);
 	return (0);
 }
