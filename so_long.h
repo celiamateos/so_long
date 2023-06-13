@@ -23,7 +23,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-# ifndef GAME_OBJECT
+# ifndef IMG_OBJECT
 # define PLAYER "./images/player.xpm"
 # define COLLECTABLE "./images/collectable.xpm"
 # define EXIT "./images/exit.xpm"
@@ -32,6 +32,25 @@
 # define WIDTH_IMG 80
 # define HEIGHT_IMG 80
 # endif 
+
+# ifndef KEY_PRESS
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define LEFT 123
+# define RIGHT 124
+# define UP 126
+# define DOWN 125
+# define ESC 53
+# endif
+
+typedef	struct s_position
+{
+	int	x;
+	int y;
+
+} t_position;
 
 typedef struct s_list
 {	
@@ -61,6 +80,7 @@ typedef struct s_list
 	int		width_win;
 	int		htimg;
 	int		whimg;
+	t_position	position;
 }	t_list;
 
 // Fuctions libft 
@@ -88,6 +108,7 @@ void	ft_check_map_rectangular(t_list *e);
 void	ft_check_map_closed(t_list *e);
 void    ft_print_map(t_list *e);
 void	ft_print_floor(t_list *e);
-void	ft_print_object(t_list *e);
+void	ft_print_object(t_list *e, int i, int j);
+void	ft_press_key(t_list *e);
 
 #endif
