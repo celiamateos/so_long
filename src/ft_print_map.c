@@ -31,46 +31,40 @@ void    ft_print_floor(t_list *e)
     }
 }
 
-void	ft_print_object(t_list *e)
+void	ft_print_object(t_list *e, int i, int j)
 {
-    int i;
-    int j;
-    int x;
-    int y;
-
-    y = 0;
-    i = 0;
-    j = 0;
-	while (y < e->height_win)
-	{
-		while (x < e->width_win)
-		{
-            if (e->map[i][j] == '1')
-                mlx_put_image_to_window(e->mlx, e->mlx_win, e->wallimg, x, y);
-            if (e->map[i][j] == 'P')
-                mlx_put_image_to_window(e->mlx, e->mlx_win, e->playerimg, x, y);
-            if (e->map[i][j] == 'C')
-                mlx_put_image_to_window(e->mlx, e->mlx_win, e->collectimg, x, y);
-            if (e->map[i][j] == 'E')
-                mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg, x, y);
-            printf("\nj:%i", j);
-            printf("\nx:%d\ny:%d", x, y);
-			j++;
-            x += e->whimg;
-		}
-        j = 0;
-        x = 0;
-		i++;
-        y += e->htimg;
-        printf("i:%i", i);
-	}
+    if (e->map[i][j] == '1')
+        mlx_put_image_to_window(e->mlx, e->mlx_win, e->wallimg, e->position.x, e->position.y);
+    if (e->map[i][j] == 'P')
+        mlx_put_image_to_window(e->mlx, e->mlx_win, e->playerimg, e->position.x, e->position.y);
+    if (e->map[i][j] == 'C')
+        mlx_put_image_to_window(e->mlx, e->mlx_win, e->collectimg, e->position.x, e->position.y);
+    if (e->map[i][j] == 'E')
+        mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg, e->position.x, e->position.y);
 }
 
 void    ft_print_map(t_list *e)
 {
+    int i;
+    int j;
+
     ft_print_floor(e);
-    ft_print_object(e);
-    
+    i = 0;
+    j = 0;
+	while (e->position.y < e->height_win)
+	{
+		while (e->position.x < e->width_win)
+		{
+            ft_print_object(e, i, j);
+			j++;
+            e->position.x += e->whimg;
+		}
+        j = 0;
+        e->position.x = 0;
+		i++;
+        e->position.y += e->htimg;
+        printf("i:%i", i);
+	}    
 }
 
 
