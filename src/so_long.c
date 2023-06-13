@@ -71,9 +71,9 @@ int	main(int argc, char **argv)
 	printf("\nwidthmap:%d", e->widthmap);
 	ft_init(e);
 	ft_print_map(e);
+	ft_press_key(e);
 	mlx_loop(e->mlx);
 	free(e);
-	close(e->fd);
 	atexit(leaks);
 	exit(1);
 	return (0);

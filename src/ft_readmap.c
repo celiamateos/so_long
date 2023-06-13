@@ -111,5 +111,6 @@ int	ft_readmap(t_list *e, char *map)
 	e->map = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_map_closed(e);
+	close(e->fd);
 	return (0);
 }
