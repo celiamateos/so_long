@@ -11,24 +11,27 @@
 /* ************************************************************************** */
 
 #include "../so_long.h"
-/*
-void ft_init(t_list *e)
-{
-	int		width = 80;
-	int		height = 80;
 
+void *ft_init(t_list *e)
+{
+	e->htimg = HEIGHT_IMG;
+	e->whimg = WIDTH_IMG;
+	e->height_win = e->htimg * e->heightmap;
+	e->width_win = e->whimg * e->widthmap;
+	printf("\nheight window:%d", e->height_win);
+	printf("\nwidth window:%d", e->width_win);
+	
 	e->mlx =  mlx_init();
-	e->mlx_win = mlx_new_window(e->mlx, width, height, "MEOW!:3");
-	e->player = mlx_xpm_file_to_image(e->mlx, "./images/player.xpm", &width, &height);
-	e->floor = mlx_xpm_file_to_image(e->mlx, "./images/floor.xpm", &width, &height);
-	e->wall = mlx_xpm_file_to_image(e->mlx, "./images/asteroid.xpm", &width, &height);
-	e->collectable = mlx_xpm_file_to_image(e->mlx, "./images/collectable.xpm", &width, &height);
-	mlx_put_image_to_window(e->mlx, e->mlx_win, e->floor, 80, 0);
-	mlx_put_image_to_window(e->mlx, e->mlx_win, e->player, 160, 0);
-	mlx_put_image_to_window(e->mlx, e->mlx_win, e->wall, 240, 0);
-	mlx_put_image_to_window(e->mlx, e->mlx_win, e->collectable, 320, 1);
-	mlx_loop(e->mlx);
-}*/
+	e->mlx_win = mlx_new_window(e->mlx, e->width_win, e->height_win, "MEOW!:3");
+	e->playerimg = mlx_xpm_file_to_image(e->mlx, PLAYER, &e->whimg, &e->htimg);
+	e->floorimg = mlx_xpm_file_to_image(e->mlx, FLOOR, &e->whimg, &e->htimg);
+	e->wallimg = mlx_xpm_file_to_image(e->mlx, WALL, &e->whimg, &e->htimg);
+	e->collectimg = mlx_xpm_file_to_image(e->mlx, COLLECTABLE, &e->whimg, &e->htimg);
+	e->exitimg = mlx_xpm_file_to_image(e->mlx, EXIT, &e->whimg, &e->htimg);
+	//mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg, 0, 0);
+
+	return (e->mlx_win);
+}
 
 void	ft_check_name_ber(t_list *e, char *map)
 {
@@ -64,9 +67,14 @@ int	main(int argc, char **argv)
 		return (0);
 	ft_check_name_ber(e, argv[1]);
 	ft_readmap(e, argv[1]);
-	//ft_init(e);
+	printf("\nheigtmap:%d", e->heightmap);
+	printf("\nwidthmap:%d", e->widthmap);
+	ft_init(e);
+	ft_print_map(e);
+	mlx_loop(e->mlx);
 	free(e);
-	exit(1);
+	close(e->fd);
 	atexit(leaks);
+	exit(1);
 	return (0);
 }
