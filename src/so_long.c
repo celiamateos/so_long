@@ -18,9 +18,7 @@ void *ft_init(t_list *e)
 	e->whimg = WIDTH_IMG;
 	e->height_win = e->htimg * e->heightmap;
 	e->width_win = e->whimg * e->widthmap;
-	printf("\nheight window:%d", e->height_win);
-	printf("\nwidth window:%d", e->width_win);
-	
+
 	e->mlx =  mlx_init();
 	e->mlx_win = mlx_new_window(e->mlx, e->width_win, e->height_win, "MEOW!:3");
 	e->playerimg = mlx_xpm_file_to_image(e->mlx, PLAYER, &e->whimg, &e->htimg);
@@ -67,11 +65,10 @@ int	main(int argc, char **argv)
 		return (0);
 	ft_check_name_ber(e, argv[1]);
 	ft_readmap(e, argv[1]);
-	printf("\nheigtmap:%d", e->heightmap);
-	printf("\nwidthmap:%d", e->widthmap);
 	ft_init(e);
 	ft_print_map(e);
-	ft_press_key(e);
+	mlx_key_hook(e->mlx_win, ft_press_key, e);
+	//mlx_hook(e->mlx_win, 17, 0, ft_error, e);
 	mlx_loop(e->mlx);
 	free(e);
 	atexit(leaks);
