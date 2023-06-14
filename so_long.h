@@ -40,8 +40,8 @@
 # define D 2
 # define LEFT 123
 # define RIGHT 124
-# define UP 125
-# define DOWN 126
+# define UP 126
+# define DOWN 125
 # define ESC 53
 # endif
 
@@ -66,6 +66,7 @@ typedef struct s_list
 	char	*gnl;
 	char	*longline;
 	char	**map;
+	char	**m;
 	int		error;
 	int		row;
 	int		wall;
@@ -85,6 +86,7 @@ typedef struct s_list
 	int		i;
 	int		j;
 	int		collected;
+	int		steps;
 	t_position	position;
 }	t_list;
 
@@ -103,18 +105,12 @@ char	*ft_strchr_gnl(char *s, int c);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 
 int		main(int argc, char **argv);
-void	ft_check_name_ber(t_list *e, char *map);
-void	*ft_init(t_list *element);
 int		ft_error(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
-int		ft_first_read(t_list *e);
-void	ft_check_map_objects(t_list *e);
-void	ft_check_map_rectangular(t_list *e);
-void	ft_check_map_closed(t_list *e);
 void    ft_print_map(t_list *e);
-void	ft_print_floor(t_list *e);
-void	ft_print_object(t_list *e, int i, int j);
 int		ft_press_key(int keycode, t_list *e);
-void    ft_move_up(t_list *e, int s);
+int		ft_open_exit(t_list *e);
+void	ft_check_valid_path(t_list *e);
+void	leaks(void);
 
 #endif

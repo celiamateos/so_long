@@ -11,15 +11,17 @@
 /* ************************************************************************** */
 #include "../so_long.h"
 
-void	ft_error(t_list *e, int error)
+int	ft_error(t_list *e, int error)
 {
 
 	if (error == 1)
 		perror("\x1b[1;31mError\ncan`t read the map\x1b[0m");
 	if (error == 2)
 	{
-		//printf("\n%s", &e->map[e->i - 1][e->lenstr - 1]);
-		perror("error de prueba");
+		mlx_clear_window(e->mlx, e->mlx_win);
+		mlx_destroy_window(e->mlx, e->mlx_win);
+		atexit(leaks);
+		exit(1);
 	}	
 	if (error == 3)
 		perror("\x1b[1;31mError\nMap should be rectangular and close\x1b[0m");
@@ -27,13 +29,14 @@ void	ft_error(t_list *e, int error)
 		perror("\x1b[1;31mError\nNot enough collectables\x1b[0m");
 	if (error == 4 && e->player != 1)
 		perror("\x1b[1;31mError\nThe map must have only one player\x1b[0m");
-  if (error == 4 && e->exit != 1)
+	if (error == 4 && e->exit != 1)
 		perror("\x1b[1;31mError\nThe map must have only one exit\x1b[0m");
-  if (error == 5)
+	if (error == 5)
 		perror("\x1b[1;31mError\nthe map has invalid characters\x1b[0m");
-  if (error == 6)
-    perror("\x1b[1;31mError\nMap isn't surrounded by walls\x1b[0m");
-  free(e);
-  close(e->fd);
+	if (error == 6)
+    	perror("\x1b[1;31mError\nMap isn't surrounded by walls\x1b[0m");
+  	close(e->fd);
+	atexit(leaks);
 	exit(1);
+	return (0);
 }

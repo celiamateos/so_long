@@ -18,7 +18,6 @@ void *ft_init(t_list *e)
 	e->whimg = WIDTH_IMG;
 	e->height_win = e->htimg * e->heightmap;
 	e->width_win = e->whimg * e->widthmap;
-
 	e->mlx =  mlx_init();
 	e->mlx_win = mlx_new_window(e->mlx, e->width_win, e->height_win, "MEOW!:3");
 	e->playerimg = mlx_xpm_file_to_image(e->mlx, PLAYER, &e->whimg, &e->htimg);
@@ -26,8 +25,6 @@ void *ft_init(t_list *e)
 	e->wallimg = mlx_xpm_file_to_image(e->mlx, WALL, &e->whimg, &e->htimg);
 	e->collectimg = mlx_xpm_file_to_image(e->mlx, COLLECTABLE, &e->whimg, &e->htimg);
 	e->exitimg = mlx_xpm_file_to_image(e->mlx, EXIT, &e->whimg, &e->htimg);
-	//mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg, 0, 0);
-
 	return (e->mlx_win);
 }
 
@@ -41,7 +38,7 @@ void	ft_check_name_ber(t_list *e, char *map)
 		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
 	{
 		perror("\x1b[1;31m Wrong! The map name is invalid\x1b[0m");
-		free(e);
+		atexit(leaks);
 		exit(1);
 	}
 }
@@ -68,7 +65,7 @@ int	main(int argc, char **argv)
 	ft_init(e);
 	ft_print_map(e);
 	mlx_key_hook(e->mlx_win, ft_press_key, e);
-	//mlx_hook(e->mlx_win, 17, 0, ft_error, e);
+	mlx_hook(e->mlx_win, 17, 0, ft_error, e);
 	mlx_loop(e->mlx);
 	free(e);
 	atexit(leaks);
