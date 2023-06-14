@@ -40,8 +40,8 @@
 # define D 2
 # define LEFT 123
 # define RIGHT 124
-# define UP 126
-# define DOWN 125
+# define UP 125
+# define DOWN 126
 # define ESC 53
 # endif
 
@@ -80,6 +80,11 @@ typedef struct s_list
 	int		width_win;
 	int		htimg;
 	int		whimg;
+	int		cat_y;
+	int		cat_x;
+	int		i;
+	int		j;
+	int		collected;
 	t_position	position;
 }	t_list;
 
@@ -100,7 +105,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
 int		main(int argc, char **argv);
 void	ft_check_name_ber(t_list *e, char *map);
 void	*ft_init(t_list *element);
-void	ft_error(t_list *e, int error);
+int		ft_error(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
 int		ft_first_read(t_list *e);
 void	ft_check_map_objects(t_list *e);
@@ -109,6 +114,7 @@ void	ft_check_map_closed(t_list *e);
 void    ft_print_map(t_list *e);
 void	ft_print_floor(t_list *e);
 void	ft_print_object(t_list *e, int i, int j);
-void	ft_press_key(t_list *e);
+int		ft_press_key(int keycode, t_list *e);
+void    ft_move_up(t_list *e, int s);
 
 #endif
