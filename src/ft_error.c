@@ -18,8 +18,12 @@ int	ft_error(t_list *e, int error)
 		perror("\x1b[1;31mError\ncan`t read the map\x1b[0m");
 	if (error == 2)
 	{
-		mlx_clear_window(e->mlx, e->mlx_win);
-		mlx_destroy_window(e->mlx, e->mlx_win);
+		//mlx_string_put(e->mlx, e->mlx_win, 80, 80, 0xFFFFFF, "CONGRATULATIONS, THE CAT HAS MANAGED TO START THE ROCKET!");
+		//mlx_clear_window(e->mlx, e->mlx_win);
+		//mlx_destroy_window(e->mlx, e->mlx_win);
+		//mlx_key_hook(e->mlx_win, ft_press_key, e);
+		//mlx_loop(e->mlx);
+		
 		atexit(leaks);
 		exit(1);
 	}	
@@ -35,6 +39,8 @@ int	ft_error(t_list *e, int error)
 		perror("\x1b[1;31mError\nthe map has invalid characters\x1b[0m");
 	if (error == 6)
     	perror("\x1b[1;31mError\nMap isn't surrounded by walls\x1b[0m");
+	if (error == 7)
+		perror("\x1b[1;31mError\nMap must have a valid path\x1b[0m");
   	close(e->fd);
 	atexit(leaks);
 	exit(1);

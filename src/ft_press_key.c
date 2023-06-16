@@ -16,7 +16,7 @@ void   ft_move_down(t_list *e)
     if (e->map[e->i + 1][e->j] != '1')
     {
         e->steps++;
-        printf("\nSteps:%d", e->steps);
+        printf("Steps:%d\n", e->steps);
         if (e->map[e->i][e->j] != 'E')
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg, e->cat_x, e->cat_y);
         if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
@@ -25,6 +25,8 @@ void   ft_move_down(t_list *e)
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg, e->cat_x, e->cat_y);
         }
         e->cat_y += HEIGHT_IMG;
+        if (e->map[e->i][e->j + 1] == 'E' && ft_open_exit(e))
+            ft_error(e, 2);
         mlx_put_image_to_window(e->mlx, e->mlx_win, e->playerimg, e->cat_x, e->cat_y);
         e->i = e->i + 1;
         if (e->map[e->i][e->j] == 'C')
@@ -42,7 +44,7 @@ void   ft_move_up(t_list *e)
     if (e->map[e->i - 1][e->j] != '1')
     {
         e->steps++;
-        printf("\nSteps:%d", e->steps);
+        printf("Steps:%d\n", e->steps);
         if (e->map[e->i][e->j] != 'E')
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg, e->cat_x, e->cat_y);
         if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
@@ -51,6 +53,8 @@ void   ft_move_up(t_list *e)
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg, e->cat_x, e->cat_y);
         }
         e->cat_y -= HEIGHT_IMG;
+        if (e->map[e->i - 1][e->j] == 'E' && ft_open_exit(e))
+            ft_error(e, 2);
         mlx_put_image_to_window(e->mlx, e->mlx_win, e->playerimg, e->cat_x, e->cat_y);
         e->i = e->i - 1;
         if (e->map[e->i][e->j] == 'C')
@@ -68,7 +72,7 @@ void   ft_move_left(t_list *e)
     if (e->map[e->i][e->j - 1] != '1')
     {
         e->steps++;
-        printf("\nSteps:%d", e->steps);
+        printf("Steps:%d\n", e->steps);
         if (e->map[e->i][e->j] != 'E')
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg, e->cat_x, e->cat_y);
         if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
@@ -77,6 +81,8 @@ void   ft_move_left(t_list *e)
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg, e->cat_x, e->cat_y);
         }
         e->cat_x -=WIDTH_IMG;
+        if (e->map[e->i][e->j - 1] == 'E' && ft_open_exit(e))
+            ft_error(e, 2);
         mlx_put_image_to_window(e->mlx, e->mlx_win, e->playerimg, e->cat_x, e->cat_y);
         e->j = e->j - 1;
         if (e->map[e->i][e->j] == 'C')
@@ -94,7 +100,7 @@ void   ft_move_right(t_list *e)
     if (e->map[e->i][e->j + 1] != '1')
     {
         e->steps++;
-        printf("\nSteps:%d", e->steps);
+        printf("Steps:%d\n", e->steps);
         if (e->map[e->i][e->j] != 'E')
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg, e->cat_x, e->cat_y);
         if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
@@ -103,6 +109,8 @@ void   ft_move_right(t_list *e)
             mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg, e->cat_x, e->cat_y);
         }
         e->cat_x +=WIDTH_IMG;
+        if (e->map[e->i][e->j + 1] == 'E' && ft_open_exit(e))
+            ft_error(e, 2);
         mlx_put_image_to_window(e->mlx, e->mlx_win, e->playerimg, e->cat_x, e->cat_y);
         e->j = e->j + 1;
         if (e->map[e->i][e->j] == 'C')
@@ -117,11 +125,6 @@ void   ft_move_right(t_list *e)
 
 int ft_press_key(int keycode, t_list *e)
 {
-    //printf("\ncollectable:%d", e->collectable);
-    //printf("\ncollected:%d", e->collected);
-    // el primer step no me lo printea jaja
-    if (e->map[e->i][e->j] == 'E' && ft_open_exit(e))
-        ft_error(e, 2);
     if (keycode == ESC)
         ft_error(e, 2);
     if (keycode == S || keycode == DOWN)

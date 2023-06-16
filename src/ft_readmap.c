@@ -109,6 +109,7 @@ int	ft_readmap(t_list *e, char *map)
 	ft_first_read(e);
 	ft_check_map_objects(e);
 	e->map = ft_split(e->longline, '\n');
+	e->m = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_map_closed(e);
 	ft_check_valid_path(e);

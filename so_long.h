@@ -87,6 +87,8 @@ typedef struct s_list
 	int		j;
 	int		collected;
 	int		steps;
+	int		count_collect;
+	int		count_exit;
 	t_position	position;
 }	t_list;
 
@@ -111,6 +113,7 @@ void    ft_print_map(t_list *e);
 int		ft_press_key(int keycode, t_list *e);
 int		ft_open_exit(t_list *e);
 void	ft_check_valid_path(t_list *e);
+int		ft_check_path(t_list *e, int y, int x);
 void	leaks(void);
 
 #endif

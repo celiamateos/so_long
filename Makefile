@@ -6,7 +6,7 @@
 #    By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/29 20:52:58 by cmateos           #+#    #+#              #
-#    Updated: 2023/06/02 13:14:19 by cmateos-         ###   ########.fr        #
+#    Updated: 2023/06/14 16:42:44 by cmateos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,12 @@ NAME = so_long
 
 # Compilador que se usará:
 CC = gcc
-CFLAGS = -g3
+CFLAGS = -Wall -Wextra -Werror -g3
 
 # Crear una biblioteca estática (ar) y agregar archivos objeto a ella (r), 
 # creándola si no existe (c) y añadiendo información de índice para facilitar la búsqueda de símbolos (s).
 INCLUDE = so_long.h
-SRC = ./src/so_long.c ./src/so_long_utils.c ./src/get_next_line_utils.c ./src/get_next_line.c ./src/ft_error.c ./src/ft_readmap.c ./src/ft_split.c  ./src/so_long_utils2.c ./src/ft_print_map.c ./src/ft_press_key.c \
+SRC = ./src/so_long.c ./src/so_long_utils.c ./src/get_next_line_utils.c ./src/get_next_line.c ./src/ft_error.c ./src/ft_readmap.c ./src/ft_split.c  ./src/so_long_utils2.c ./src/ft_print_map.c ./src/ft_press_key.c ./src/ft_open_exit.c ./src/ft_check_path.c \
 
 # Define una lista de archivos objeto correspondientes a los archivos fuente.
 # Sustituye la extensión .c por .o.
