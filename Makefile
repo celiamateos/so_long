@@ -31,7 +31,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 # Crear una biblioteca estática (ar) y agregar archivos objeto a ella (r), 
 # creándola si no existe (c) y añadiendo información de índice para facilitar la búsqueda de símbolos (s).
 INCLUDE = so_long.h
-SRC = ./src/so_long.c ./src/so_long_utils.c ./src/get_next_line_utils.c ./src/get_next_line.c ./src/ft_error.c ./src/ft_readmap.c ./src/ft_split.c  ./src/so_long_utils2.c ./src/ft_print_map.c ./src/ft_press_key.c ./src/ft_open_exit.c ./src/ft_check_path.c \
+SRC = ./src/so_long.c ./src/so_long_utils.c ./src/get_next_line_utils.c ./src/get_next_line.c ./src/ft_error.c ./src/ft_readmap.c ./src/ft_split.c  ./src/so_long_utils2.c ./src/ft_print_map.c ./src/ft_press_key.c ./src/ft_open_exit.c ./src/ft_check_path.c ./src/ft_win.c ./src/ft_printf.c ./src/ft_printf_utils.c ./src/ft_render.c \
 
 # Define una lista de archivos objeto correspondientes a los archivos fuente.
 # Sustituye la extensión .c por .o.
