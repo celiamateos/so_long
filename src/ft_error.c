@@ -32,7 +32,18 @@ int	ft_error(t_list *e, int error)
 	if (error == 7)
 		perror("\x1b[1;31mError\nMap must have a valid path\x1b[0m");
 	if (error == 8)
-		perror("\x1b[1;31mError\nYou are flipao\x1b[0m");
+		perror("\x1b[1;31mError\nLa ruta de las imagenes no existe\x1b[0m");
+	if (e->fd != -1)
+		close(e->fd);
+	atexit(leaks);
+	exit(1);
+	return (0);
+}
+
+int	ft_error2(t_list *e, int error)
+{
+	if (error == 1)
+		perror("\x1b[1;31mError\nMap is too big\x1b[0m");
 	if (e->fd != -1)
 		close(e->fd);
 	atexit(leaks);

@@ -9,8 +9,8 @@
 /*   Updated: 2023/05/31 15:55:05 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -31,6 +31,9 @@
 # define EXIT "./textures/exit.xpm"
 # define WALL "./textures/newasteroid.xpm"
 # define FLOOR "./textures/floor.xpm"
+# define BLACKHOLE1 "./textures/blackhole1.xpm"
+# define BLACKHOLE2 "./textures/blackhole2.xpm"
+# define BLACKHOLE3 "./textures/blackhole3.xpm"
 # define WIDTH_IMG 80
 # define HEIGHT_IMG 80
 
@@ -63,6 +66,9 @@ typedef struct s_list
 	void		*exitimg;
 	void		*floorimg;
 	void		*wallimg;
+	void		*blackhole1;
+	void		*blackhole2;
+	void		*blackhole3;
 	int			fd;
 	char		*namemap;
 	char		*gnl;
@@ -76,6 +82,7 @@ typedef struct s_list
 	int			player;
 	int			exit;
 	int			floor;
+	int			blackhole;
 	int			objects;
 	int			heightmap;
 	int			widthmap;
@@ -91,6 +98,11 @@ typedef struct s_list
 	int			steps;
 	int			count_collect;
 	int			count_exit;
+	int			blackhole_x;
+	int			blackhole_y;
+	char		*steps_bns;
+	int			loops;
+	int			*blackholes;
 	t_position	position;
 }	t_list;
 
@@ -102,6 +114,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
+char	*ft_itoa(int n);
 
 // Fuctions GNL
 char	*get_next_line(t_list *e);
@@ -122,19 +135,22 @@ int		ft_putstr_pf(char *s);
 
 int		main(int argc, char **argv);
 int		ft_error(t_list *e, int error);
+int		ft_error2(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
 void	ft_print_map(t_list *e);
 int		ft_press_key(int keycode, t_list *e);
 int		ft_open_exit(t_list *e);
 void	ft_check_valid_path(t_list *e);
 int		ft_check_path(t_list *e, int y, int x);
-int		ft_win(t_list *e);
+int		ft_end_game(t_list *e);
 void	ft_render_floor(t_list *e);
 void	ft_render_player_down_or_left(t_list *e);
 void	ft_render_player_up(t_list *e);
 void	ft_render_player_right(t_list *e);
-void	ft_render_collectable(t_list *e);
 void	ft_render_exit(t_list *e);
 void	leaks(void);
+void	ft_init_bonus(t_list *e);
+int		ft_animation(t_list *e);
+void	ft_printsteps(t_list *e);
 
 #endif

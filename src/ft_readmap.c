@@ -72,30 +72,31 @@ void	ft_check_map_rectangular(t_list *e)
 		if (lenline != lenline2)
 			ft_error(e, 6);
 	}
+	if (lenline > 31 || e->heightmap > 17)
+		ft_error2(e, 1);
+	e->widthmap = lenline + 1;
 }
 
 void	ft_check_map_closed(t_list *e)
 {
 	int		i;
 	int		j;
-	char	c;
 	int		lenstr;
 
 	lenstr = 0;
 	i = 0;
 	j = 0;
-	c = '1';
 	lenstr = ft_strlen(e->map[1]);
 	e->widthmap = lenstr;
 	while (e->map[i] != NULL)
 	{
 		while (e->map[i][j] != '\0')
 		{
-			if (e->map[0][j] != c || e->map[e->row - 1][j] != c)
+			if (e->map[0][j] != '1' || e->map[e->row - 1][j] != '1')
 				ft_error(e, 3);
 			j++;
 		}
-		if (e->map[i][0] != c || e->map[i][lenstr - 1] != c)
+		if (e->map[i][0] != '1' || e->map[i][lenstr - 1] != '1')
 			ft_error(e, 3);
 		i++;
 	}
@@ -111,7 +112,7 @@ int	ft_readmap(t_list *e, char *map)
 	e->map = ft_split(e->longline, '\n');
 	e->m = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
-	ft_check_map_closed(e);
+	//ft_check_map_closed(e);
 	ft_check_valid_path(e);
 	close(e->fd);
 	return (0);
