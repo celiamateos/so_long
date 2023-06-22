@@ -9,7 +9,7 @@
 /*   Updated: 2023/06/14 16:42:28 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 int	ft_open_exit(t_list *e)
 {

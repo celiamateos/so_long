@@ -9,8 +9,7 @@
 /*   Updated: 2023/06/08 17:57:53 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 void	*ft_init(t_list *e)
 {
@@ -37,7 +36,21 @@ void	*ft_init(t_list *e)
 		|| !e->floorimg || !e->wallimg || !e->collectimg || !e->exitimg
 		|| !e->mlx || !e->mlx_win)
 		ft_error(e, 8);
+	ft_init_bonus(e);
 	return (e->mlx_win);
+}
+
+void	ft_init_bonus(t_list *e)
+{
+	e->blackhole1 = mlx_xpm_file_to_image(e->mlx, BLACKHOLE1,
+			&e->whimg, &e->htimg);
+	e->blackhole2 = mlx_xpm_file_to_image(e->mlx, BLACKHOLE2,
+			&e->whimg, &e->htimg);
+	e->blackhole3 = mlx_xpm_file_to_image(e->mlx, BLACKHOLE3,
+			&e->whimg, &e->htimg);
+	if (!e->blackhole1 || !e->blackhole2 || !e->blackhole3)
+		ft_error(e, 8);
+
 }
 
 void	ft_check_name_ber(t_list *e, char *map)
@@ -78,6 +91,7 @@ int	main(int argc, char **argv)
 	ft_print_map(e);
 	mlx_key_hook(e->mlx_win, ft_press_key, e);
 	mlx_hook(e->mlx_win, 17, 0, ft_error, e);
+	mlx_loop_hook(e->mlx, ft_animation, e);
 	mlx_loop(e->mlx);
 	free(e);
 	atexit(leaks);

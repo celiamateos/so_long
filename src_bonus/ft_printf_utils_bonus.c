@@ -9,7 +9,7 @@
 /*   Updated: 2023/06/19 21:10:54 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 int	ft_puthex(unsigned int nbr, char *hex, int *count)
 {

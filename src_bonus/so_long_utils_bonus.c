@@ -9,7 +9,7 @@
 /*   Updated: 2023/06/05 13:14:05 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -75,4 +75,9 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		}
 	}
 	return (dst);
+}
+
+int	ft_putchr_pf(char c)
+{
+	return (write(1, &c, 1));
 }

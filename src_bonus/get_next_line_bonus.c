@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/15 17:36:16 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 char	*auxupdater(char *aux)
 {

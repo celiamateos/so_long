@@ -9,7 +9,7 @@
 /*   Updated: 2023/06/20 11:28:59 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 void	ft_render_player_down_or_left(t_list *e)
 {
@@ -37,6 +37,8 @@ void	ft_render_floor(t_list *e)
 
 void	ft_render_exit(t_list *e)
 {
+	mlx_put_image_to_window(e->mlx, e->mlx_win, e->floorimg,
+		e->cat_x, e->cat_y);
 	mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg,
 		e->cat_x, e->cat_y);
 }

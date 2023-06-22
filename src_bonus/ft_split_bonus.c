@@ -9,7 +9,7 @@
 /*   Updated: 2023/04/13 20:47:09 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 static int	ft_countwords(char const *s, char c)
 {

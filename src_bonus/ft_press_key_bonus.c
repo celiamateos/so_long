@@ -9,25 +9,24 @@
 /*   Updated: 2023/06/13 20:21:37 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 void	ft_move_down(t_list *e)
 {
 	if (e->map[e->i + 1][e->j] != '1')
 	{
 		e->steps++;
-		if (!ft_win(e))
-			ft_printf("Spteps: %i\n", e->steps);
+		if (!ft_end_game(e))
+			ft_printsteps(e);
 		if (e->map[e->i][e->j] != 'E')
 			ft_render_floor(e);
 		if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
-		{
-			ft_render_floor(e);
 			ft_render_exit(e);
-		}
 		e->cat_y += HEIGHT_IMG;
 		ft_render_player_down_or_left(e);
 		e->i = e->i + 1;
+		if (e->map[e->i][e->j] == 'X')
+			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'E' && ft_open_exit(e))
 			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'C')
@@ -45,18 +44,17 @@ void	ft_move_up(t_list *e)
 	if (e->map[e->i - 1][e->j] != '1')
 	{
 		e->steps++;
-		if (!ft_win(e))
-			ft_printf("Spteps: %i\n", e->steps);
+		if (!ft_end_game(e))
+			ft_printsteps(e);
 		if (e->map[e->i][e->j] != 'E')
 			ft_render_floor(e);
 		if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
-		{
-			ft_render_floor(e);
 			ft_render_exit(e);
-		}
 		e->cat_y -= HEIGHT_IMG;
 		ft_render_player_up(e);
 		e->i = e->i - 1;
+		if (e->map[e->i][e->j] == 'X')
+			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'E' && ft_open_exit(e))
 			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'C')
@@ -74,18 +72,17 @@ void	ft_move_left(t_list *e)
 	if (e->map[e->i][e->j - 1] != '1')
 	{
 		e->steps++;
-		if (!ft_win(e))
-			ft_printf("Spteps: %i\n", e->steps);
+		if (!ft_end_game(e))
+			ft_printsteps(e);
 		if (e->map[e->i][e->j] != 'E')
 			ft_render_floor(e);
 		if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
-		{
-			ft_render_floor(e);
 			ft_render_exit(e);
-		}
 		e->cat_x -= WIDTH_IMG;
 		ft_render_player_down_or_left(e);
 		e->j = e->j - 1;
+		if (e->map[e->i][e->j] == 'X')
+			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'E' && ft_open_exit(e))
 			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'C')
@@ -103,18 +100,17 @@ void	ft_move_right(t_list *e)
 	if (e->map[e->i][e->j + 1] != '1')
 	{
 		e->steps++;
-		if (!ft_win(e))
-			ft_printf("Spteps: %i\n", e->steps);
+		if (!ft_end_game(e))
+			ft_printsteps(e);
 		if (e->map[e->i][e->j] != 'E')
 			ft_render_floor(e);
 		if (e->map[e->i][e->j] == 'E' && !ft_open_exit(e))
-		{
-			ft_render_floor(e);
 			ft_render_exit(e);
-		}
 		e->cat_x += WIDTH_IMG;
 		ft_render_player_right(e);
 		e->j = e->j + 1;
+		if (e->map[e->i][e->j] == 'X')
+			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'E' && ft_open_exit(e))
 			ft_error(e, 2);
 		if (e->map[e->i][e->j] == 'C')

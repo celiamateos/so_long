@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/24 22:15:38 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 int	ft_variables(char c, va_list arg, int *count)
 {

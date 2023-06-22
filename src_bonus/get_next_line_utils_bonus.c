@@ -9,7 +9,7 @@
 /*   Updated: 2023/05/15 17:31:51 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 size_t	ft_strlen_gnl(char *str)
 {

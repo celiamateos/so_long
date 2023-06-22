@@ -9,7 +9,7 @@
 /*   Updated: 2023/06/01 19:51:48 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 int	ft_first_read(t_list *e)
 {
@@ -25,11 +25,8 @@ int	ft_first_read(t_list *e)
 	return (0);
 }
 
-void	ft_check_map_objects(t_list *e)
+void	ft_check_map_objects(t_list *e, int i)
 {
-	int	i;
-
-	i = 0;
 	while (e->longline[i] != '\0')
 	{	
 		e->objects++;
@@ -43,13 +40,17 @@ void	ft_check_map_objects(t_list *e)
 			e->exit++;
 		if (e->longline[i] == '0')
 			e->floor++;
+		if (e->longline[i] == 'X')
+			e->blackhole++;
 		if (e->longline[i] == '\n')
 			e->objects--;
 		i++;
 	}
-	if (e->player != 1 || e->collectable < 1 || e->exit != 1)
+	if (e->player != 1 || e->collectable < 1 || e->exit != 1
+		|| e->blackhole < 1)
 		ft_error(e, 4);
-	if (e->player + e->collectable + e->exit + e->wall + e->floor != e->objects)
+	if (e->player + e->collectable + e->exit + e->wall + e->floor
+		+ e->blackhole != e->objects)
 		ft_error(e, 5);
 }
 
@@ -72,46 +73,24 @@ void	ft_check_map_rectangular(t_list *e)
 		if (lenline != lenline2)
 			ft_error(e, 6);
 	}
-}
-
-void	ft_check_map_closed(t_list *e)
-{
-	int		i;
-	int		j;
-	char	c;
-	int		lenstr;
-
-	lenstr = 0;
-	i = 0;
-	j = 0;
-	c = '1';
-	lenstr = ft_strlen(e->map[1]);
-	e->widthmap = lenstr;
-	while (e->map[i] != NULL)
-	{
-		while (e->map[i][j] != '\0')
-		{
-			if (e->map[0][j] != c || e->map[e->row - 1][j] != c)
-				ft_error(e, 3);
-			j++;
-		}
-		if (e->map[i][0] != c || e->map[i][lenstr - 1] != c)
-			ft_error(e, 3);
-		i++;
-	}
+	if (lenline > 31 || e->heightmap > 17)
+		ft_error2(e, 1);
+	e->widthmap = lenline + 1;
 }
 
 int	ft_readmap(t_list *e, char *map)
 {
+	int	i;
+
+	i = 0;
 	e->fd = open(map, O_RDONLY);
 	if (e->fd == -1)
 		ft_error(e, 1);
 	ft_first_read(e);
-	ft_check_map_objects(e);
+	ft_check_map_objects(e, i);
 	e->map = ft_split(e->longline, '\n');
 	e->m = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
-	ft_check_map_closed(e);
 	ft_check_valid_path(e);
 	close(e->fd);
 	return (0);
