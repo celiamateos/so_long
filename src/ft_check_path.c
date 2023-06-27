@@ -54,9 +54,9 @@ int	ft_check_path(t_list *e, int y, int x)
 		ft_check_collect_and_exit(e, y, x);
 	if (e->m[y][x] == 'E')
 		ft_check_collect_and_exit(e, y, x);
-	if (x == e->widthmap - 1 ||y == e->heightmap - 1 ||
-		(y == 0 && e->m[y][x] == '0') || (x == 0 && e->m[y][x] == '0'))
-		ft_error2(e, 1);
+	if (x == e->widthmap - 1 || y == e->heightmap - 1
+		|| (y == 0 && e->m[y][x] == '0') || (x == 0 && e->m[y][x] == '0'))
+		ft_error(e, 3);
 	if (e->m[y + 1][x] != '1' || (e->m[y - 1][x] != '1')
 		|| e->m[y][x + 1] != '1' || e->m[y][x - 1] != '1')
 		e->m[y][x] = '1';
@@ -76,17 +76,7 @@ int	ft_check_path(t_list *e, int y, int x)
 
 void	ft_check_valid_path(t_list *e)
 {
-	int	y;
-
-	y = 0;
-	printf("wh%i\n", e->widthmap);
-	printf("ht%i\n", e->heightmap);
 	ft_player_position(e);
 	if (e->count_collect != e->collectable || e->count_exit != 1)
 		ft_error(e, 7);
-	while (e->m[y] != NULL)
-	{
-		printf("%s\n", e->m[y]);
-		y++;
-	}
 }

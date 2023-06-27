@@ -22,6 +22,7 @@ int	ft_first_read(t_list *e)
 		if (e->gnl == NULL)
 			break ;
 	}
+	close(e->fd);
 	return (0);
 }
 
@@ -92,6 +93,5 @@ int	ft_readmap(t_list *e, char *map)
 	e->m = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_valid_path(e);
-	close(e->fd);
 	return (0);
 }

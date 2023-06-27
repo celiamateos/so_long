@@ -122,7 +122,7 @@ int		ft_putstr_pf(char *s);
 
 int		main(int argc, char **argv);
 int		ft_error(t_list *e, int error);
-int 	ft_error2(t_list *e, int error);
+int		ft_error2(t_list *e, int error);
 int		ft_readmap(t_list *e, char *map);
 void	ft_print_map(t_list *e);
 int		ft_press_key(int keycode, t_list *e);
@@ -134,7 +134,6 @@ void	ft_render_floor(t_list *e);
 void	ft_render_player_down_or_left(t_list *e);
 void	ft_render_player_up(t_list *e);
 void	ft_render_player_right(t_list *e);
-void	ft_render_collectable(t_list *e);
 void	ft_render_exit(t_list *e);
 void	leaks(void);
 

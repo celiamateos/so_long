@@ -50,15 +50,6 @@ void	ft_print_object(t_list *e, int i, int j)
 	if (e->map[i][j] == 'E')
 		mlx_put_image_to_window(e->mlx, e->mlx_win, e->exitimg,
 			e->position.x, e->position.y);
-	if (e->map[i][j] == 'X')
-	{
-		mlx_put_image_to_window(e->mlx, e->mlx_win, e->blackhole1,
-			e->position.x, e->position.y);
-		e->blackhole_x = e->position.x;
-		e->blackhole_y = e->position.y;
-		ft_animation(e);
-
-	}
 }
 
 void	ft_print_map(t_list *e)

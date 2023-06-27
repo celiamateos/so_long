@@ -32,7 +32,6 @@ int	ft_win(t_list *e)
 		mlx_key_hook(e->mlx_win, ft_press_key, e);
 		mlx_hook(e->mlx_win, 17, 0, ft_error, e);
 		mlx_loop(e->mlx);
-		atexit(leaks);
 		exit(1);
 		return (1);
 	}

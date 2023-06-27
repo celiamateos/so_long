@@ -81,6 +81,8 @@ char	*read_line(t_list *e, char *aux)
 	while (i > 0 && !ft_strchr_gnl(aux, '\n'))
 	{		
 		i = read(e->fd, buffer, BUFFER_SIZE);
+		if (i == 0 && aux == NULL)
+			ft_error(e, 1);
 		if (i == -1)
 		{
 			free(aux);

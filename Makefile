@@ -6,7 +6,7 @@
 #    By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/29 20:52:58 by cmateos           #+#    #+#              #
-#    Updated: 2023/06/14 16:42:44 by cmateos-         ###   ########.fr        #
+#    Updated: 2023/06/27 16:48:27 by cmateos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 	@echo "$(COLOR_BLUE) Cleaned all! $(COLOR_RESET)"
 
 re: fclean all

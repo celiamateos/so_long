@@ -35,7 +35,7 @@ void	*ft_init(t_list *e)
 	if (!e->playerup || !e->playerleft || !e->playerdown || !e->playerright
 		|| !e->floorimg || !e->wallimg || !e->collectimg || !e->exitimg
 		|| !e->mlx || !e->mlx_win)
-		ft_error(e, 8);
+		ft_error2(e, 8);
 	ft_init_bonus(e);
 	return (e->mlx_win);
 }
@@ -49,8 +49,7 @@ void	ft_init_bonus(t_list *e)
 	e->blackhole3 = mlx_xpm_file_to_image(e->mlx, BLACKHOLE3,
 			&e->whimg, &e->htimg);
 	if (!e->blackhole1 || !e->blackhole2 || !e->blackhole3)
-		ft_error(e, 8);
-
+		ft_error2(e, 8);
 }
 
 void	ft_check_name_ber(t_list *e, char *map)
@@ -62,7 +61,7 @@ void	ft_check_name_ber(t_list *e, char *map)
 	if (i < 2 || e->namemap[i - 4] != '.' || e->namemap[i - 3] != 'b'
 		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
 	{
-		perror("\x1b[1;31m Wrong! The map name is invalid\x1b[0m");
+		perror("\x1b[1;31m Error\n The map name is invalid\x1b[0m");
 		atexit(leaks);
 		exit(1);
 	}
@@ -79,7 +78,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		perror("\x1b[1;31m Wrong! You must enter 2 arguments\x1b[0m");
+		perror("\x1b[1;31m Error\n You must enter 2 arguments\x1b[0m");
 		return (0);
 	}
 	e = ft_calloc(1, sizeof(t_list));

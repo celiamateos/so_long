@@ -53,7 +53,7 @@ char	*ft_itoa(int n)
 {
 	char	*trans;
 	int		i;
-	
+
 	i = ft_lennum(n);
 	trans = (char *)malloc((i + 1) * sizeof(char));
 	if (!trans)

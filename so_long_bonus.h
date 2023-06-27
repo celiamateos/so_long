@@ -102,7 +102,6 @@ typedef struct s_list
 	int			blackhole_y;
 	char		*steps_bns;
 	int			loops;
-	int			*blackholes;
 	t_position	position;
 }	t_list;
 

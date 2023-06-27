@@ -76,3 +76,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
+
+int	ft_putchr_pf(char c)
+{
+	return (write(1, &c, 1));
+}

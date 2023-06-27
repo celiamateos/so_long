@@ -54,9 +54,9 @@ int	ft_check_path(t_list *e, int y, int x)
 		ft_check_collect_and_exit(e, y, x);
 	if (e->m[y][x] == 'E')
 		ft_check_collect_and_exit(e, y, x);
-	if (x == e->widthmap - 1 ||y == e->heightmap - 1 ||
-		(y == 0 && e->m[y][x] == '0') || (x == 0 && e->m[y][x] == '0'))
-		ft_error2(e, 1);
+	if (x == e->widthmap - 1 || y == e->heightmap - 1
+		|| (y == 0 && e->m[y][x] == '0') || (x == 0 && e->m[y][x] == '0'))
+		ft_error(e, 3);
 	if ((e->m[y + 1][x] != '1' && e->m[y + 1][x] != 'X') ||
 			(e->m[y - 1][x] != '1' && e->m[y - 1][x] != 'X') ||
 			(e->m[y][x + 1] != '1' && e->m[y][x + 1] != 'X') ||

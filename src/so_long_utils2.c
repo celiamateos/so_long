@@ -35,7 +35,35 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-int	ft_putchr_pf(char c)
+static int	ft_lennum(int n)
 {
-	return (write(1, &c, 1));
+	int	digit;
+
+	digit = 0;
+	while (n > 9)
+	{
+		n = n / 10;
+		digit++;
+	}
+	digit++;
+	return (digit);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*trans;
+	int		i;
+
+	i = ft_lennum(n);
+	trans = (char *)malloc((i + 1) * sizeof(char));
+	if (!trans)
+		return (NULL);
+	trans[i] = '\0';
+	while (i > 0)
+	{
+		i--;
+		trans[i] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (trans);
 }
