@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 22:30:34 by cmateos           #+#    #+#             */
-/*   Updated: 2023/06/08 17:57:53 by cmateos-         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:05:19 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long_bonus.h"
@@ -62,7 +62,6 @@ void	ft_check_name_ber(t_list *e, char *map)
 		|| e->namemap[i - 2] != 'e' || e->namemap[i - 1] != 'r')
 	{
 		perror("\x1b[1;31m Error\n The map name is invalid\x1b[0m");
-		atexit(leaks);
 		exit(1);
 	}
 }
@@ -93,7 +92,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(e->mlx, ft_animation, e);
 	mlx_loop(e->mlx);
 	free(e);
-	atexit(leaks);
 	exit(1);
 	return (0);
 }

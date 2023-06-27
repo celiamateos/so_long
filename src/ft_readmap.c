@@ -6,7 +6,7 @@
 /*   By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:51:46 by cmateos           #+#    #+#             */
-/*   Updated: 2023/06/01 19:51:48 by cmateos-         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:05:42 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long.h"
@@ -89,6 +89,5 @@ int	ft_readmap(t_list *e, char *map)
 	e->m = ft_split(e->longline, '\n');
 	ft_check_map_rectangular(e);
 	ft_check_valid_path(e);
-	atexit(leaks);
 	return (0);
 }

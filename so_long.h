@@ -6,7 +6,7 @@
 /*   By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:54:09 by cmateos           #+#    #+#             */
-/*   Updated: 2023/05/31 15:55:05 by cmateos-         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:01:43 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -135,6 +135,5 @@ void	ft_render_player_down_or_left(t_list *e);
 void	ft_render_player_up(t_list *e);
 void	ft_render_player_right(t_list *e);
 void	ft_render_exit(t_list *e);
-void	leaks(void);
 
 #endif
