@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils2.c                                   :+:      :+:    :+:   */
+/*   so_long_utils2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmateos <cmateos-@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:48:53 by cmateos           #+#    #+#             */
-/*   Updated: 2023/06/05 16:48:56 by cmateos-         ###   ########.fr       */
+/*   Updated: 2023/06/28 16:59:08 by cmateos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long_bonus.h"
@@ -34,7 +34,10 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
-
+/*
+ @brief ALOCA MEMORIA
+ @param n el numero a convertir en string
+ */
 static int	ft_lennum(int n)
 {
 	int	digit;
@@ -48,6 +51,7 @@ static int	ft_lennum(int n)
 	digit++;
 	return (digit);
 }
+
 
 char	*ft_itoa(int n)
 {
